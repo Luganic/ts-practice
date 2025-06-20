@@ -1,9 +1,11 @@
-enum Size {
-  S = "S",
-  M = "M",
-  L = "L",
-  XL = "XL",
+enum Product {
+  S = 'S',
+  M = 'M',
+  L = 'L',
+  XL = 'XL',
 }
+
+type ClothingSize = 'S' | 'M' | 'L' | 'XL';
 
 interface Product {
   id: string;
@@ -12,31 +14,32 @@ interface Product {
   membersOnly?: boolean;
 }
 
-interface ClothingProduct extends Product {
-  sizes: Size[];
+interface ClothingSize extends Product {
+  sizes: ClothingSize[];
+  color: string;
 }
 
-const product1: ClothingProduct = {
-  id: "c001",
-  name: "코드잇 블랙 후드 집업",
-  price: 129000,
-  membersOnly: true,
-  sizes: [Size.M, Size.L],
-};
+type ShoeSize  = 220 | 225 | 230 | 235 | 240 | 245 | 250 | 260
 
-const product2: Product = {
-  id: "d001",
-  name: "코드잇 텀블러",
-  price: 25000,
-};
-
-interface PrintProductFunction {
-  (product: Product): void;
+interface shoeProduct extends Product {
+  sizes: ShoeSize[];
+  handmade: boolean;
 }
 
-const printProduct: PrintProductFunction = (product) => {
-  console.log(`${product.name}의 가격은 ${product.price}원입니다.`);
-};
 
-printProduct(product1);
-printProduct(product2);
+function printSizes(product: ClothingSize | shoeProduct) {
+  const availableSizes = product.sizes.join(', ');
+  console.log(`구매 가능한 사이즈는 다음과 같습니다: ${availableSizes}`);
+
+  if ('color' in product) {
+    console.log(`색상: ${product.color}`);
+  }
+
+  if ('handmade' in product) {
+    console.log(
+      product.handmade
+      ? '이 상품은 장인이 직접 만듭니다.'
+      : '이 상품은 공장에서 만들어졌습니다.'
+    )
+  }
+}
