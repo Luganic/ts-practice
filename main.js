@@ -1,25 +1,53 @@
 "use strict";
-var Size;
-(function (Size) {
-    Size["S"] = "S";
-    Size["M"] = "M";
-    Size["L"] = "L";
-    Size["XL"] = "XL";
-})(Size || (Size = {}));
-const product1 = {
-    id: "c001",
-    name: "코드잇 블랙 후드 집업",
-    price: 129000,
-    membersOnly: true,
-    sizes: [Size.M, Size.L],
+const shoeSizes = [230, 250, 280];
+shoeSizes.map((num) => { });
+const clothingSizes = ["M", "L", "XL"];
+clothingSizes.map((names) => { });
+function printArray(items) {
+    // T: 타입 파라미터 | T, U, V
+    for (const item of items) {
+        console.log(item);
+    }
+}
+printArray(shoeSizes);
+printArray(clothingSizes);
+/* 기본 제네릭 함수*/
+function logValue(value) {
+    console.log(value);
+}
+logValue("hello"); // T = string
+logValue(42); // T = number
+logValue(true); // T = boolean
+/* 제네릭 배열 함수 */
+function printItems(items) {
+    for (const item of items) {
+        console.log(item);
+    }
+}
+printItems(["A", "B", "C"]); // T = string
+printItems([1, 2, 3]); // T = number
+const wrappedString = { value: "text" };
+const wrappedNumber = { value: 123 };
+const stringBox = { content: "Hello" };
+const numberBox = { content: 99 };
+/* 여러 제네릭 타입 사용 (T, U) */
+function makePair(first, second) {
+    return [first, second];
+}
+const pair1 = makePair("age", 20); // [string, number]
+const pair2 = makePair(true, "yes"); // [boolean, string]
+const option1 = { label: "One", value: 1 };
+const option2 = { label: "Yes", value: "Y" };
+const userResponse = {
+    success: true,
+    data: { name: "Alice " },
 };
-const product2 = {
-    id: "d001",
-    name: "코드잇 텀블러",
-    price: 25000,
+const productResponse = {
+    success: true,
+    data: ["Book", "phone"],
 };
-const printProduct = (product) => {
-    console.log(`${product.name}의 가격은 ${product.price}원입니다.`);
+const loginState = { value: true, loading: false };
+const profileState = {
+    value: { name: "Tom" },
+    loading: true,
 };
-printProduct(product1);
-printProduct(product2);
