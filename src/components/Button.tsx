@@ -1,11 +1,11 @@
 import styles from "./Button.module.css";
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 
 interface Props {
   className?: string;
   id?: string;
   children?: ReactNode;
-  onClick: any;
+  onClick: (e: MouseEvent) => void; // 또는 MouseEventHandler<HTMLButtonElement>
 }
 
 export default function Button({
